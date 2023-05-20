@@ -26,8 +26,8 @@ export default {
 
 		return new HTMLRewriter()
 			.on(`[src*="//${origin.hostname}/"]`, {
-				element(element: { getAttribute: (arg0: string) => any; setAttribute: (arg0: string, arg1: string) => void; }) {
-					const src = element.getAttribute('src');
+				element(element: HTMLElement) {
+					const src = element.getAttribute('src')!;
 					// if "//(hostname)/(...)"
 					const originSrc = new URL(src.startsWith('//')? `https:${src}` : src);
 
@@ -40,8 +40,8 @@ export default {
 				}
 			})
 			.on(`[href*="//${origin.hostname}/"]`, {
-				element(element: { getAttribute: (arg0: string) => any; setAttribute: (arg0: string, arg1: string) => void; }) {
-					const href = element.getAttribute('href');
+				element(element: HTMLElement) {
+					const href = element.getAttribute('href')!;
 					// if "//(hostname)/(...)"
 					const originHref = new URL(href.startsWith('//')? `https:${href}` : href);
 					
