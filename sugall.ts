@@ -11,7 +11,7 @@ console.clear();
 
 
 export default {
-	async fetch(request: Request, env: {}, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const { hostname, pathname, search } = new URL(request.url);
 
 		const response = fetch(`https://booru.sugall.com${pathname}${search}`, {
@@ -26,7 +26,7 @@ export default {
 		//return response;
 		return new HTMLRewriter()
 			.on("article.withleft > section#commentlistimage", {
-				element(element) {
+				element(element: HTMLElement) {
 					element.remove();
 				}
 			})
