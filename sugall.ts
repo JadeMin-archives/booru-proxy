@@ -26,7 +26,7 @@ export default {
 		//return response;
 		return new HTMLRewriter()
 			.on("article.withleft > section#commentlistimage", {
-				element(element: HTMLElement) {
+				element(element) {
 					element.remove();
 				}
 			})
