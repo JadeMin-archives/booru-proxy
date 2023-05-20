@@ -28,8 +28,10 @@ export default {
 			.on(`[src*="//${origin.hostname}/"]`, {
 				element(element: { getAttribute: (arg0: string) => any; setAttribute: (arg0: string, arg1: string) => void; }) {
 					const src = element.getAttribute('src');
+					// if "//(hostname)/(...)"
 					const originSrc = new URL(src.startsWith('//')? `https:${src}` : src);
 
+					// if "(...)//(path)"
 					if(originSrc.pathname.startsWith('//')) {
 						element.setAttribute('src', `/${originSrc.pathname.slice(1)}`);
 					} else {
@@ -40,8 +42,10 @@ export default {
 			.on(`[href*="//${origin.hostname}/"]`, {
 				element(element: { getAttribute: (arg0: string) => any; setAttribute: (arg0: string, arg1: string) => void; }) {
 					const href = element.getAttribute('href');
+					// if "//(hostname)/(...)"
 					const originHref = new URL(href.startsWith('//')? `https:${href}` : href);
 					
+					// if "(...)//(path)"
 					if(originHref.pathname.startsWith('//')) {
 						element.setAttribute('href', `/${originHref.pathname.slice(1)}`);
 					} else {
