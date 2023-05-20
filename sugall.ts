@@ -11,7 +11,7 @@ console.clear();
 
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: {}, ctx: ExecutionContext): Promise<Response> {
 		const { hostname, pathname, search } = new URL(request.url);
 
 		const response = fetch(`https://booru.sugall.com${pathname}${search}`, {
